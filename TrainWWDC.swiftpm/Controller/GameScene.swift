@@ -140,19 +140,21 @@ class GameScene: SKScene {
     private func gameOver(delay: Double) {
         self.beltNode.removeAllActions()
         self.beltNode.removeFromParent()
+        self.stopOrRunTrain()
+//        self.delayRunTrainTextures(delay: 6.2)
+        self.createTrainStation(positionX: 1960, delay: 1.5)
         
-        
-//        self.delay(seconds: delay, closure: {
-//                if let view = self.view {
-//                    if let scene = SKScene(fileNamed: "GameOverScene") {
-//                        scene.scaleMode = .aspectFill
-//                        scene.size.width = view.frame.width
-//                        scene.size.height = view.frame.height
-//                        view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
-//                    }
-//                }
-//            
-//        })
+        self.delay(seconds: delay, closure: {
+                if let view = self.view {
+                    if let scene = SKScene(fileNamed: "GameOverScene") {
+                        scene.scaleMode = .aspectFill
+                        scene.size.width = view.frame.width
+                        scene.size.height = view.frame.height
+                        view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
+                    }
+                }
+            
+        })
     }
     
     private func question() -> [Int] {
