@@ -146,11 +146,9 @@ extension GameScene {
         let action = SKAction.animate(with: greenBoxtextures, timePerFrame: delayAnimation, resize: true, restore: false)
         self.beltNode.run(action)
     }
+
     
-    
-    
-    
-    //reversed animate
+//    //reversed animate
 //    func runReverseRedBoxAnimation(delayAnimation: Double){
 //        self.beltNode.removeAllActions()
 //        let action = SKAction.animate(with: redReverseBoxtextures, timePerFrame: delayAnimation, resize: true, restore: false)
@@ -169,4 +167,17 @@ extension GameScene {
 //        let action = SKAction.animate(with: blueReverseBoxtestures, timePerFrame: delayAnimation, resize: true, restore: false)
 //        self.beltNode.run(action)
 //    }
+    
+    //    private func stopAndRemoveBox(numQuestion: [Int]){
+    //        self.stopOrRunTrain()
+    //        self.delayRunTrainTextures(delay: 6.2)
+    //        self.createTrainStation(positionX: 1960, delay: 1.5)
+    //        self.runReverseAllBoxAnimate(runDelay: 6.0, delayIntervalAnimation: 2.0, boxNumber: self.arrayQuestion)
+    //        runReverseAllBoxAnimate(runDelay: 6.0, delayIntervalAnimation: 2.0, boxArrayQuestion: arrayQuestion)
+    //        self.runAllBoxAnimate(runDelay: 20.0, delayIntervalAnimation: 2.0)// 10.0   2.0
+    //
+    //        print("pause")
+    //        self.runTrain(delay: 25.6)//15.6
+    //    }
+    
 }

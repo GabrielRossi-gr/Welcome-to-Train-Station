@@ -5,8 +5,12 @@ import Foundation
 
 struct ContentView: View {
     
-    let scene = SKScene(fileNamed: "GameOverScene")
-//        let scene = SKScene(fileNamed: "FirstScene")
+//    let scene = SKScene(fileNamed: "GameScene")
+//    let scene = SKScene(fileNamed: "FirstScene")
+//        let scene = SKScene(fileNamed: "GameOverScene")
+
+
+        let scene = SKScene(fileNamed: "TutorialScene")
 
     var body: some View {
 

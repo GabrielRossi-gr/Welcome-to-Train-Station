@@ -14,57 +14,10 @@
             filePath = "ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "01AB7EB6-BC12-4A7E-A601-14226675A640 - 944d82a76b66436a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TrainWWDC.ContentView.body.getter : some"
-                  moduleName = "TrainWWDC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrielrossi/Projects/TrainWWDC.swiftpm/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12"
-                  endingLineNumber = "12"
-                  offsetFromSymbolStart = "236">
-               </Location>
-               <Location
-                  uuid = "01AB7EB6-BC12-4A7E-A601-14226675A640 - 6eb88bef0c2cfac"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; Swift.Optional&lt;_SpriteKit_SwiftUI.SpriteView&gt; in TrainWWDC.ContentView.body.getter : some"
-                  moduleName = "TrainWWDC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrielrossi/Projects/TrainWWDC.swiftpm/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "280">
-               </Location>
-               <Location
-                  uuid = "01AB7EB6-BC12-4A7E-A601-14226675A640 - 6eb88bef0c2cf8d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; Swift.Optional&lt;_SpriteKit_SwiftUI.SpriteView&gt; in TrainWWDC.ContentView.body.getter : some"
-                  moduleName = "TrainWWDC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrielrossi/Projects/TrainWWDC.swiftpm/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12"
-                  endingLineNumber = "12"
-                  offsetFromSymbolStart = "280">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -77,8 +30,8 @@
             filePath = "ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "9"
-            endingLineNumber = "9"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
             landmarkName = "ContentView"
             landmarkType = "14">
          </BreakpointContent>
@@ -97,38 +50,6 @@
             endingLineNumber = "72"
             landmarkName = "setupRunTrainAnimation(delayAnimation:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5EA2E5DA-1A41-44BC-8A22-07E51C52A449 - 7af6d86deb8029be"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TrainWWDC.GameScene.setupAnimationRunTrain(delayAnimation: Swift.Double) -&gt; ()"
-                  moduleName = "TrainWWDC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrielrossi/Projects/WWDC24/TrainWWDC.swiftpm/Model/TrainTextures.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "74"
-                  endingLineNumber = "74"
-                  offsetFromSymbolStart = "88">
-               </Location>
-               <Location
-                  uuid = "5EA2E5DA-1A41-44BC-8A22-07E51C52A449 - 7af6d86deb8029be"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TrainWWDC.GameScene.setupAnimationRunTrain(delayAnimation: Swift.Double) -&gt; ()"
-                  moduleName = "TrainWWDC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrielrossi/Projects/WWDC24/TrainWWDC.swiftpm/Model/TrainTextures.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "74"
-                  endingLineNumber = "74"
-                  offsetFromSymbolStart = "408">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -145,38 +66,6 @@
             endingLineNumber = "73"
             landmarkName = "setupRunTrainAnimation(delayAnimation:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "74ED224E-A1A8-41D2-876B-156E5919AE0E - 7af6d86deb8029d1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TrainWWDC.GameScene.setupAnimationRunTrain(delayAnimation: Swift.Double) -&gt; ()"
-                  moduleName = "TrainWWDC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrielrossi/Projects/WWDC24/TrainWWDC.swiftpm/Model/TrainTextures.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "75"
-                  endingLineNumber = "75"
-                  offsetFromSymbolStart = "216">
-               </Location>
-               <Location
-                  uuid = "74ED224E-A1A8-41D2-876B-156E5919AE0E - 7af6d86deb8029d1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TrainWWDC.GameScene.setupAnimationRunTrain(delayAnimation: Swift.Double) -&gt; ()"
-                  moduleName = "TrainWWDC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrielrossi/Projects/WWDC24/TrainWWDC.swiftpm/Model/TrainTextures.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "75"
-                  endingLineNumber = "75"
-                  offsetFromSymbolStart = "532">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -189,42 +78,10 @@
             filePath = "ConfigExtention.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "ConfigExtention"
             landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "A5FF2A3B-3A2B-4BFB-961F-72925FB8B547 - 7e00b9e1305909cd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TrainWWDC.ConfigExtention.getFontSetup() -&gt; ()"
-                  moduleName = "TrainWWDC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrielrossi/Projects/WWDC24/TrainWWDC.swiftpm/ConfigExtention.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "92">
-               </Location>
-               <Location
-                  uuid = "A5FF2A3B-3A2B-4BFB-961F-72925FB8B547 - 312db9e601dc3d8c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TrainWWDC.ConfigExtention.init() -&gt; TrainWWDC.ConfigExtention"
-                  moduleName = "TrainWWDC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrielrossi/Projects/WWDC24/TrainWWDC.swiftpm/ConfigExtention.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "164">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -237,8 +94,8 @@
             filePath = "ConfigExtention.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "getFontSetup()"
             landmarkType = "7">
          </BreakpointContent>
@@ -253,8 +110,8 @@
             filePath = "ConfigExtention.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "delay(seconds:closure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -269,90 +126,10 @@
             filePath = "Model/BoxTextures.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "GameScene"
             landmarkType = "21">
-            <Locations>
-               <Location
-                  uuid = "94A2AE0A-36F7-4A2E-9777-B159E53EAF51 - ce4e34857391b200"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TrainWWDC.GameScene.runReverseGreenBoxAnimation(delayAnimation: Swift.Double) -&gt; ()"
-                  moduleName = "TrainWWDC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrielrossi/Projects/WWDC24/TrainWWDC.swiftpm/Model/BoxTextures.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "60">
-               </Location>
-               <Location
-                  uuid = "94A2AE0A-36F7-4A2E-9777-B159E53EAF51 - ce4e34857391b1e1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TrainWWDC.GameScene.runReverseGreenBoxAnimation(delayAnimation: Swift.Double) -&gt; ()"
-                  moduleName = "TrainWWDC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrielrossi/Projects/WWDC24/TrainWWDC.swiftpm/Model/BoxTextures.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "166"
-                  endingLineNumber = "166"
-                  offsetFromSymbolStart = "60">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DAD4E895-DE0A-40B9-9F0B-F3793AD5AD02"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Model/BoxConfig.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "GameScene"
-            landmarkType = "21">
-            <Locations>
-               <Location
-                  uuid = "DAD4E895-DE0A-40B9-9F0B-F3793AD5AD02 - c47b3a800c3e685c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in TrainWWDC.GameScene.runReverseAllBoxAnimate(runDelay: Swift.Double, delayIntervalAnimation: Swift.Double, boxArrayQuestion: Swift.Array&lt;Swift.Int&gt;) -&gt; ()"
-                  moduleName = "TrainWWDC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrielrossi/Projects/WWDC24/TrainWWDC.swiftpm/Model/BoxConfig.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "111"
-                  endingLineNumber = "111"
-                  offsetFromSymbolStart = "840">
-               </Location>
-               <Location
-                  uuid = "DAD4E895-DE0A-40B9-9F0B-F3793AD5AD02 - ecdcb3e33827d4c7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; () in TrainWWDC.GameScene.runReverseAllBoxAnimate(runDelay: Swift.Double, delayIntervalAnimation: Swift.Double, boxArrayQuestion: Swift.Array&lt;Swift.Int&gt;) -&gt; ()"
-                  moduleName = "TrainWWDC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrielrossi/Projects/WWDC24/TrainWWDC.swiftpm/Model/BoxConfig.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

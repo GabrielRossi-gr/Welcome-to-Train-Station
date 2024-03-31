@@ -62,6 +62,9 @@ class Train {
     }
     
     
+    public func resetScore(){
+        self.score = 0
+    }
     
     //remove box
     public func removeRedBox(){

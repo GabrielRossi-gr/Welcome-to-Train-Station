@@ -8,17 +8,17 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "TrainWWDC",
+    name: "Welcome to Train Station",
     platforms: [
         .iOS("16.0")
     ],
     products: [
         .iOSApplication(
-            name: "TrainWWDC",
+            name: "Welcome to Train Station",
             targets: ["AppModule"],
             bundleIdentifier: "com.gabrielrossi.TrainWWDC",
             teamIdentifier: "HT9NV9BAKV",
-            displayVersion: "1.0",
+            displayVersion: "0.0.1",
             bundleVersion: "1",
             appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.red),

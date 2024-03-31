@@ -12,23 +12,37 @@ class GameOverScene: SKScene {
     
     private var gameOverLabel = SKLabelNode(fontNamed: "PressStart2P-Regular")
     private var scoreLabel = SKLabelNode(fontNamed: "PressStart2P-Regular")
-    private var button = SKSpriteNode()
-    
+    private var restartButton = SKSpriteNode()
+    private var tutorial = SKSpriteNode()
+    var tutorialNode = SKSpriteNode()
     
     override func didMove(to view: SKView) {
-        ConfigExtention.font.getFontSetup()
-        fontSetup()
+//        ConfigExtention.font.getFontSetup()
+//        fontSetup()
         buttonSetup()
+        setupTutorialNode(imageName: "GameOverIMG")
     }
     
     private func buttonSetup(){
-        button.removeFromParent()
-        button.texture = SKTexture(imageNamed: "ButtonIMGStart")
-        button.position = CGPoint(x: 0, y: (self.scene?.frame.minY)! + 70)
-        button.size = CGSize(width: 263, height: 56)
-        button.zPosition = 20
-        button.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        addChild(button)
+        
+        
+        self.restartButton.removeFromParent()
+        restartButton.texture = SKTexture(imageNamed: "Restart")
+        restartButton.position = CGPoint(x: 0, y: (self.scene?.frame.minY)! + 70)
+        restartButton.size = CGSize(width: 320, height: 76)
+        restartButton.zPosition = 30
+        restartButton.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        restartButton.name = "ButtonIMGStart"
+        addChild(restartButton)
+        
+        
+        tutorial.removeFromParent()
+        tutorial.texture = SKTexture(imageNamed: "Tutorial")
+        tutorial.position = CGPoint(x: 0, y: (self.scene?.frame.minY)! + 180)
+        tutorial.size = CGSize(width: 320, height: 76)
+        tutorial.zPosition = 20
+        tutorial.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        addChild(tutorial)
     }
     
     private func fontSetup(){
@@ -52,10 +66,27 @@ class GameOverScene: SKScene {
         addChild(scoreLabel)
     }
     
+    private func setupTutorialNode(imageName: String){
+        let sceneFrame = scene?.frame
+        let heightScene = CGFloat(sceneFrame?.height ?? 00)
+        tutorialNode.removeFromParent()
+        tutorialNode.texture = SKTexture(imageNamed: imageName)
+        tutorialNode.size = CGSize(
+            width: (1024 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)  /*512*/ ,
+            height: (1366 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)/*683*/
+        )
+        
+        //1024
+        //1366
+        
+        tutorialNode.zPosition = 10
+        tutorialNode.position = CGPoint(x: 0, y: 0)
+        addChild(tutorialNode)
+    }
     
-    func changeScene() {
+    func changeScene(sceneName: String) {
         if let view = self.view {
-            if let scene = SKScene(fileNamed: "GameScene") {
+            if let scene = SKScene(fileNamed: sceneName) {
                 scene.scaleMode = .aspectFill
                 scene.size.width = view.frame.width
                 scene.size.height = view.frame.height
@@ -66,9 +97,14 @@ class GameOverScene: SKScene {
             view.showsFPS = true
         }
     }
+    
+    func resetScore(){
+        Train.singleton.resetScore()
+    }
 
     
 }
+
 
 
 //MARK: touchesBegan
@@ -77,17 +113,20 @@ extension GameOverScene {
         for touch in touches {
             let touchLocation = touch.location(in: self)
             
-            
-            if button.contains(touchLocation) {
-                print("play")
-                changeScene()
+            if( tutorial.contains(touchLocation)){
+                self.resetScore()
+                changeScene(sceneName: "TutorialScene")
             }
+            
+            if restartButton.contains(touchLocation) {
+                self.resetScore()
+                changeScene(sceneName: "GameScene")
+            }
+            
             
             
             print("touch")
         }
     }
-    
-    
 }
 

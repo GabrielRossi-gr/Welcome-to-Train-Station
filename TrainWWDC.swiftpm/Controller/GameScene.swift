@@ -3,7 +3,6 @@
 //  Train
 //
 //  Created by Gabriel Rossi on 28/12/23.
-//
 
 import SpriteKit
 import GameplayKit
@@ -29,16 +28,27 @@ class GameScene: SKScene {
     var trainStationBackNode = SKSpriteNode()
     var trainStationFrontNode = SKSpriteNode()
     var stopTrainStationIMG = SKSpriteNode()
-    var questionPlace = SKSpriteNode()
+    var questionPlate = SKSpriteNode()
     var score = SKLabelNode(fontNamed: "PressStart2P-Regular")
     var stopQuestionON = false
     var isTrueQuestion = true
     var arrayQuestion = [Int]()
     var pressButton = false
     
+    
     let redBoxtextures = BoxTextures.getRedTextures()
     let blueBoxtestures = BoxTextures.getBlueTextures()
     let greenBoxtextures = BoxTextures.getGreenTextures()
+    
+    
+    //minus plate
+    var redBoxNode = SKSpriteNode()
+    var greenBoxNode = SKSpriteNode()
+    var blueBoxNode = SKSpriteNode()
+    var redLabel = SKLabelNode(fontNamed: "PressStart2P-Regular")
+    var greenLabel = SKLabelNode(fontNamed: "PressStart2P-Regular")
+    var blueLabel = SKLabelNode(fontNamed: "PressStart2P-Regular")
+    
     
     var redReverseBoxtextures = [SKTexture]()
     var blueReverseBoxtestures = [SKTexture]()
@@ -47,13 +57,57 @@ class GameScene: SKScene {
     
     var backgoundController = BackgroundController()
     var train = Train()
+
+    var enableSongs = true
+    var enableLoopSongs = true
+    var backgroundSong = PlaySong(songName: "TrainBackGroundMusic1.mp3")
+    var apitoSong = PlaySong(songName: "TrainSongsApito.mp3")
+
+    var cameraNode: SKCameraNode?
     
     
-    override func didMove(to view: SKView) {
+    override func didMove(to view: SKView) { // 800 800
+        self.size = CGSize(width: 800, height: 800)
+
+//        self.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        
+        cameraNode = SKCameraNode()
+        self.camera = cameraNode
+        self.addChild(cameraNode!)
+
+//        cameraNode?.yScale = 0.5
+//        cameraNode?.xScale = 0.5
+        
         backgroundColor = .black
         self.firstSetup()
     }
-    ///------------------------------------------------------------------------------
+    ///------------------------------------------------------------------
+    
+    func getMaxXVisible() -> CGFloat? {
+        guard let cameraNode = cameraNode else {
+            return nil
+        }
+        let maxXVisible = self.size.width / 2 / cameraNode.xScale
+        return maxXVisible
+    }
+    
+    override func sceneDidLoad() {
+        if let scaledSize = cameraScaledSize(self.size) {
+            super.sceneDidLoad()
+            self.size = scaledSize
+        }
+    }
+    
+    func cameraScaledSize(_ originalSize: CGSize) -> CGSize? {
+        guard let xScale = cameraNode?.xScale, let yScale = cameraNode?.yScale else {
+            return nil
+        }
+
+        let scaledWidth = originalSize.width / xScale
+        let scaledHeight = originalSize.height / yScale
+
+        return CGSize(width: scaledWidth, height: scaledHeight)
+    }
     
     func firstSetup(){
         ConfigExtention.font.getFontSetup()
@@ -66,45 +120,129 @@ class GameScene: SKScene {
         self.runAllBoxAnimate(runDelay: 0.10, delayIntervalAnimation: 2.0)
         self.runTrain(delay: 5.5)
         self.setUpButton()
+        self.setupMinusPlateNodes()
+        
+        self.backgroundSong.playAudio(loop: true, enableSongs: enableLoopSongs)
     }
-    
+
     private func randomBoll() -> Bool{
         let distribuicao = GKRandomDistribution(lowestValue: 1, highestValue: 10)
         let randomNumber = distribuicao.nextInt()
-    
         return randomNumber <= 5
     }
     
     private func randomBollPercentOfTrue(percentTrue: Int) -> Bool{
         let distribuicao = GKRandomDistribution(lowestValue: 1, highestValue: 10)
         let randomNumber = distribuicao.nextInt()
-        print("percent: ", percentTrue / 10)
-        print("random num: ", randomNumber)
-
+//        print("percent: ", percentTrue / 10)
+//        print("random num: ", randomNumber)
         return randomNumber <= (percentTrue / 10)
     }
-
     
     private func nextStep(delay: Double){
         self.delay(seconds: delay, closure: {
-            if(self.randomBollPercentOfTrue(percentTrue: 80)){
+            if(self.randomBollPercentOfTrue(percentTrue: 80) || Train.singleton.getScore() == 0){
             // question
-                self.addStopQuestionPlace(node: self.questionPlace, removeDelay: 8.0)//2.0
+                self.addStopQuestionPlate(node: self.questionPlate, removeDelay: 8.0)//2.0
             //stop
             } else {
-                self.addStopTrainPlace(node: self.stopTrainStationIMG, removeDelay: 3.0)
+                self.addStopTrainPlate(node: self.stopTrainStationIMG, removeDelay: 3.0)
                 self.stopTrain()
             }
         })
     }
     
-    private func addStopQuestionPlace(node: SKSpriteNode, removeDelay: Double){
+    public func setupMinusPlateNodes(){
+        self.redBoxNode = self.addSpriteNode(texture: "RedBox", size: CGSize(width: 40, height: 40), zPosition: 10, ancorPoint: CGPoint(x: 0.5, y: 0.5))
+        redBoxNode.position = CGPoint(x: -80, y: -180)
+        
+        self.greenBoxNode = self.addSpriteNode(texture: "GreenBox", size: CGSize(width: 40, height: 40), zPosition: 10, ancorPoint: CGPoint(x: 0.5, y: 0.5))
+        
+        self.blueBoxNode = self.addSpriteNode(texture: "BlueBox", size: CGSize(width: 40, height: 40), zPosition: 10, ancorPoint: CGPoint(x: 0.5, y: 0.5))
+        
+        redLabel.fontColor = .white
+        redLabel.fontSize = 15
+        redLabel.zPosition = 11
+        redLabel.horizontalAlignmentMode = .center
+        
+        greenLabel.fontColor = .white
+        greenLabel.fontSize = 15
+        greenLabel.zPosition = 11
+        greenLabel.horizontalAlignmentMode = .center
+
+        blueLabel.fontColor = .white
+        blueLabel.fontSize = 15
+        blueLabel.zPosition = 11
+        blueLabel.horizontalAlignmentMode = .center
+
+        
+        redBoxNode.position = CGPoint(x: -50, y: 25)
+        greenBoxNode.position = CGPoint(x: 0, y: 25)
+        blueBoxNode.position = CGPoint(x: 50, y: 25)
+        redLabel.position = CGPoint(x: -56, y: 50)
+        greenLabel.position = CGPoint(x: -6, y: 50)
+        blueLabel.position = CGPoint(x: 44, y: 50)
+    }
+    
+    private func removeMinusPlateNodes(){
+        self.redBoxNode.removeFromParent()
+        self.greenBoxNode.removeFromParent()
+        self.blueBoxNode.removeFromParent()
+        
+        self.redLabel.removeFromParent()
+        self.greenLabel.removeFromParent()
+        self.blueLabel.removeFromParent()
+    }
+    
+    private func addMinusPlateNodes(delay: Double){
+        removeMinusPlateNodes()
+        redLabel.text = "-\(arrayQuestion[0])"
+        greenLabel.text = "-\(arrayQuestion[1])"
+        blueLabel.text = "-\(arrayQuestion[2])"
+        
+        self.delay(seconds: delay, closure: {
+            if(self.arrayQuestion[0] > 0){
+                self.addChild(self.redLabel)
+                self.addChild(self.redBoxNode)
+            }
+            
+            if(self.arrayQuestion[1] > 0){
+                self.addChild(self.greenLabel)
+                self.addChild(self.greenBoxNode)
+            }
+            
+            if(self.arrayQuestion[2] > 0){
+                self.addChild(self.blueBoxNode)
+                self.addChild(self.blueLabel)
+            }
+            
+            self.delay(seconds: 2.5, closure: {
+                self.removeMinusPlateNodes()
+            })
+        })
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    private func addStopQuestionPlate(node: SKSpriteNode, removeDelay: Double){
         self.stopQuestionON = true
         self.arrayQuestion = question()
         
-        let questionNode = QuestionPlaceNode(quantRed: arrayQuestion[0], quantGreen: arrayQuestion[1], quantBlue: arrayQuestion[2])
+        let questionNode = QuestionPlateNode(quantRed: arrayQuestion[0], quantGreen: arrayQuestion[1], quantBlue: arrayQuestion[2])
+        questionNode.anchorPoint = CGPoint(x: 0.0, y: 0.0)
         
-        questionNode.position = CGPoint(x: self.scene?.frame.maxX ?? 0.0, y: 260)
+        
+        let maxXVisible = getMaxXVisible() //(self.scene?.frame.maxX ?? 00)
+        
+        questionNode.position = CGPoint(x: (self.scene?.frame.maxX ?? 00) - 90, y: 260)
+        
+//        (self.scene?.frame.maxX ?? 00)
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         addChild(questionNode)
         
         self.delay(seconds: removeDelay, closure: {
@@ -118,19 +256,21 @@ class GameScene: SKScene {
                 
                 if(self.isTrueQuestion){
                     self.stopTrain()
-                    self.train.addScore(quant: 10)
+                    Train.singleton.addScore(quant: 10)
                     self.updateScoreLabelNode()
+                    self.removeTrainBoxQuestion()
+                    self.addMinusPlateNodes(delay: 4.0)
+                    
                 } else {
-                    self.gameOver(delay: 5.0)
+                    self.gameOver(delay: 6.0)
                 }
-                
                 
             //no press button
             } else {
                 self.createTrainStation(positionX: 1960, delay: 0.1)
                 self.nextStep(delay: 5)
                 if(self.isTrueQuestion == false){
-                    self.train.addScore(quant: 1)
+                    Train.singleton.addScore(quant: 1)
                     self.updateScoreLabelNode()
                 }
             }
@@ -141,51 +281,80 @@ class GameScene: SKScene {
         self.beltNode.removeAllActions()
         self.beltNode.removeFromParent()
         self.stopOrRunTrain()
-//        self.delayRunTrainTextures(delay: 6.2)
+        self.delayRunTrainTextures(delay: 6.2)
         self.createTrainStation(positionX: 1960, delay: 1.5)
+        self.addExclamationAlert(delay: 4)
         
         self.delay(seconds: delay, closure: {
-                if let view = self.view {
-                    if let scene = SKScene(fileNamed: "GameOverScene") {
-                        scene.scaleMode = .aspectFill
-                        scene.size.width = view.frame.width
-                        scene.size.height = view.frame.height
-                        view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
-                    }
+            if let view = self.view {
+                if let scene = SKScene(fileNamed: "GameOverScene") {
+                    scene.scaleMode = .aspectFill
+                    scene.size.width = view.frame.width
+                    scene.size.height = view.frame.height
+                    view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
                 }
-            
+            }
         })
+    }
+    
+    private func addExclamationAlert(delay: Double){
+        
+        self.delay(seconds: delay, closure: {
+            let exclamationAlert = SKSpriteNode()
+            self.addSpriteNode(node: exclamationAlert, texture: "exclamationAlert", position: CGPoint(x: 0, y: 0), size: CGSize(width: 124, height: 124), zPosition: 20, ancorPoint: CGPoint(x: 0.5, y: 0.5))
+        })
+    }
+    
+    public func playSong(songName: String, delay: Double){
+        if(enableSongs){
+            self.delay(seconds: delay, closure: {
+                let song = SKAction.playSoundFileNamed(songName, waitForCompletion: false)
+
+                self.run(song)
+            })
+        }
     }
     
     private func question() -> [Int] {
         addButtonNode()
         //true question
-        if(randomBoll()){
+        playSong(songName: "alertSong", delay: 0)
+        
+        
+        if(randomBollPercentOfTrue(percentTrue: 50) || Train.singleton.getScore() == 0){
             isTrueQuestion = true
-            print("true question: ------------")
             let question = self.trueQuestion()
-            return question
             
+            print("true question: ------------")
+            return question
         //false question
         } else {
             isTrueQuestion = false
-            print("false question: ||||||||||||")
             let question = self.falseQuestion()
+            
+            print("false question: ||||||||||||")
             return question
         }
     }
     
-    
     private func trueQuestion() -> [Int]{
         var questionArray = [0,0,0]
         let arrayBoxTrain = train.getTrainBox()
-        
-        for x in 0..<3{
+        var hiddenBox = false
+        for x in 0..<3 {
             if(arrayBoxTrain[x] > 0){
-                if(randomBoll()){
-                    questionArray[x]  = arrayBoxTrain[x] - 1
-                } else {
-                    questionArray[x] = arrayBoxTrain[x] / 2 + 1
+                    switch self.sortRandomNumber(maxNum: 1) {
+                    case 0:
+                        questionArray[x]  = arrayBoxTrain[x] - 1
+                    case 1:
+                        questionArray[x] = arrayBoxTrain[x] / 2 + 1
+                    default:
+                        print("ERRO: trueQuestion()")
+                    }
+                
+                if(!hiddenBox && self.sortRandomNumber(maxNum: 10) <= 3 && questionArray[x] > 5){
+                    questionArray[x] = 0
+                    hiddenBox = true
                 }
             }
         }
@@ -205,7 +374,7 @@ class GameScene: SKScene {
         return questionArrey
     }
     
-    private func addStopTrainPlace(node: SKSpriteNode, removeDelay: Double){
+    private func addStopTrainPlate(node: SKSpriteNode, removeDelay: Double){
         node.removeFromParent()
         node.size = CGSize(width: 349, height: 262)
         node.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -230,20 +399,25 @@ class GameScene: SKScene {
     }
     
     private func removeGround(node: SKSpriteNode) {
-        if(node.position.x < (self.scene?.size.width ?? 00) - 700.0) {
+        if(node.position.x < (self.scene?.size.width ?? 00) - 2000.0 /**700celular**/) {
             node.removeFromParent()
 //            print("remove")
         }
     }
     
-    func moveGrounds () {
-        addEnumerateNodes(nodeName: "BackGroundPaisage", speed: speedBackgroundPaisage)
-        addEnumerateNodes(nodeName: "BackgroundFloor", speed: speedBackgroundFlor)
-        addEnumerateNodes(arrayNodeName: arrayBackgroundSky, speed: speedBackgroundSky, baseNameNode: "SkyBackground", arraySize: arrayBackgroundSky.count)
-        
-        addOneEnumerateNodes(nodeName: "trainStationfront", speed: speedBackgroundFlor)
-        addOneEnumerateNodes(nodeName: "trainStationBack", speed: speedBackgroundFlor)
-        addOneEnumerateNodes(nodeName: "RedBox0", speed: speedBackgroundFlor)
+    private func removeTrainBoxQuestion(){
+        for x in 0...2 {
+            switch x {
+            case 0 :
+                train.removeRedBox(quant: arrayQuestion[0])
+            case 1:
+                train.removeGreenBox(quant: arrayQuestion[1])
+            case 2:
+                train.removeBlueBox(quant: arrayQuestion[2])
+            default:
+                print("ERRO: removeTrainBoxQuestion()")
+            }
+        }
     }
     
     private func updateScoreLabelNode(){
@@ -251,8 +425,8 @@ class GameScene: SKScene {
         score.fontColor = .black
         score.fontSize = 17
         score.zPosition = 12   //(self.scene?.frame.maxY ?? 230) - 100)
-        score.position = CGPoint(x: -170, y: (self.scene?.frame.maxY ?? 430) - 100)
-        score.text = "score: \(train.getScore())"
+        score.position = CGPoint(x: (self.scene?.frame.minX ?? -170) + 140 , y: (self.scene?.frame.maxY ?? 430) - 100)
+        score.text = "score: \(Train.singleton.getScore())"
         score.horizontalAlignmentMode = .left
         addChild(score)
     }
@@ -275,18 +449,6 @@ class GameScene: SKScene {
         print("pause")
         self.runTrain(delay: 11)
     }
-    
-//    private func stopAndRemoveBox(numQuestion: [Int]){
-//        self.stopOrRunTrain()
-//        self.delayRunTrainTextures(delay: 6.2)
-//        self.createTrainStation(positionX: 1960, delay: 1.5)
-//        self.runReverseAllBoxAnimate(runDelay: 6.0, delayIntervalAnimation: 2.0, boxNumber: self.arrayQuestion)
-//        runReverseAllBoxAnimate(runDelay: 6.0, delayIntervalAnimation: 2.0, boxArrayQuestion: arrayQuestion)
-//        self.runAllBoxAnimate(runDelay: 20.0, delayIntervalAnimation: 2.0)// 10.0   2.0
-//
-//        print("pause")
-//        self.runTrain(delay: 25.6)//15.6
-//    }
  
     private func setUpButton(){
         redReverseBoxtextures = redBoxtextures.reversed()
@@ -295,7 +457,7 @@ class GameScene: SKScene {
 
         buttonNode.removeFromParent()
         buttonNode.texture = SKTexture(imageNamed: "ButtonIMGStop")
-        buttonNode.position = CGPoint(x: 0, y: (self.scene?.frame.minY)! + 70)
+        buttonNode.position = CGPoint(x: 0, y: (self.scene?.frame.minY ?? 00) + 70)
         buttonNode.size = CGSize(width: 263, height: 56)
         buttonNode.zPosition = 10
         buttonNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -311,10 +473,6 @@ class GameScene: SKScene {
     }
 }
 
-
-
-
-
 //MARK: touchesBegan
 extension GameScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -322,17 +480,14 @@ extension GameScene {
             let touchLocation = touch.location(in: self)
             
             if buttonNode.contains(touchLocation) {
-                
                 if(stopQuestionON){
                     print("touch button")
                     pressButton = true
-                    
                     stopQuestionON = false
                     removeButton()
+                    self.playSong(songName: "TrainSongsApito", delay: 0)
+                    
                 }
-                
-                
-
                 self.removeButton()
             }
     

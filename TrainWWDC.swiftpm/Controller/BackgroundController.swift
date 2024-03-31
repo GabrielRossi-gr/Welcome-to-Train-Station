@@ -17,6 +17,17 @@ class BackgroundController : SKNode{
 
 //Mark: create backgrounds
 extension GameScene {
+    
+    func moveGrounds () {
+        addEnumerateNodes(nodeName: "BackGroundPaisage", speed: speedBackgroundPaisage)
+        addEnumerateNodes(nodeName: "BackgroundFloor", speed: speedBackgroundFlor)
+        addEnumerateNodes(arrayNodeName: arrayBackgroundSky, speed: speedBackgroundSky, baseNameNode: "SkyBackground", arraySize: arrayBackgroundSky.count)
+        
+        addOneEnumerateNodes(nodeName: "trainStationfront", speed: speedBackgroundFlor)
+        addOneEnumerateNodes(nodeName: "trainStationBack", speed: speedBackgroundFlor)
+        addOneEnumerateNodes(nodeName: "RedBox0", speed: speedBackgroundFlor)
+    }
+    
     func createGrounds () {
         for i in 0...13 {
             let imageName = "SkyBackground\(i)"
@@ -26,7 +37,7 @@ extension GameScene {
             arrayBackgroundSky[i] = imageName
         }
         
-        for i in 0...4 {
+        for i in 0...5 /*4 celular*/ {
             
             let BackGroundPaisage = addSpriteNode(texture: "BackGroundPaisage", size: CGSize(width: 303, height: 224), zPosition: 3, ancorPoint: backGroundAncorPoint)
             BackGroundPaisage.position = CGPoint(x: BackGroundPaisage.size.width * CGFloat(i), y: -10)
@@ -75,9 +86,13 @@ extension GameScene {
         if(moveBackground){
             stopGrounds()
             openTrainDor(delay: 4.0)
+
         } else {
             runGrounds()
             closeTrainDor(delay: 0.0)
+            playSong(songName: "TrainSongsApito",delay: 1)
+
+            
         }
     }
 }
@@ -131,8 +146,8 @@ extension GameScene {
             (node, error) in
             node.position.x -= CGFloat(speed)
             
-            if node.position.x < -((self.scene?.size.width)!) {
-                node.position.x += (self.scene?.size.width)! * 3
+            if node.position.x < -((self.scene?.size.width)! - 100) {
+                node.position.x += (self.scene?.size.width)! * 2
             }
         }))
     }
@@ -144,7 +159,7 @@ extension GameScene {
                 node.position.x -= CGFloat(speed)
                 
                 if node.position.x < -((self.scene?.size.width)!) {
-                    node.position.x += (self.scene?.size.width)! * 3
+                    node.position.x += (self.scene?.size.width)! * 2
                 }
             }))
         }

@@ -7,11 +7,13 @@
 
 import Foundation
 import SpriteKit
-
+import GameplayKit
 
 
 //MARK: AddNode func
 extension SKScene{
+    
+    
     public func addSpriteNode(node: SKSpriteNode, texture: String, position: CGPoint, size: CGSize, zPosition: Double, ancorPoint: CGPoint){
         
         node.texture = SKTexture(imageNamed: texture)
@@ -49,6 +51,7 @@ extension SKScene{
         }
     }
 
+
 }
 
 
@@ -57,8 +60,14 @@ extension SKScene{
 
 class ConfigExtention {
     
+//    ConfigExtention.font.getFontSetup()
     static var font = ConfigExtention()
     private let fontURL = Bundle.module.url(forResource: "PressStart2P-Regular", withExtension: "ttf")!
     func getFontSetup(){
         CTFontManagerRegisterFontsForURL(fontURL as CFURL, CTFontManagerScope.process, nil)    }
+    
+    
+    
+    
+    
 }
