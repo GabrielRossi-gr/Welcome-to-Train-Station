@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-class QuestionPlaceNode: SKSpriteNode{
+class QuestionPlateNode: SKSpriteNode{
     
     private var place = SKSpriteNode()
     private var redBoxNode = SKSpriteNode()
@@ -126,3 +126,4 @@ class QuestionPlaceNode: SKSpriteNode{
     }
     
 }
+
