@@ -121,8 +121,12 @@ class GameScene: SKScene {
         self.runTrain(delay: 5.5)
         self.setUpButton()
         self.setupMinusPlateNodes()
-        
+       
         self.backgroundSong.playAudio(loop: true, enableSongs: enableLoopSongs)
+        
+        
+        //test questionPlatePosition
+//        self.addStopQuestionPlate(node: questionPlate, removeDelay: 20)
     }
 
     private func randomBoll() -> Bool{
@@ -234,12 +238,20 @@ class GameScene: SKScene {
         self.arrayQuestion = question()
         
         let questionNode = QuestionPlateNode(quantRed: arrayQuestion[0], quantGreen: arrayQuestion[1], quantBlue: arrayQuestion[2])
-        questionNode.anchorPoint = CGPoint(x: 0.0, y: 0.0)
-        
         
         let maxXVisible = getMaxXVisible() //(self.scene?.frame.maxX ?? 00)
+        questionNode.anchorPoint = CGPoint(x: 0.0, y: 0.0)
+
         
-        questionNode.position = CGPoint(x: (self.scene?.frame.maxX ?? 00) - 90, y: 260)
+        switch AppConfig.UIDevice() {
+        case .pad:
+            questionNode.position = CGPoint(x: (self.scene?.frame.maxX ?? 00) - 90, y: 260)
+        case .phone:
+            questionNode.position = CGPoint(x: (self.scene?.frame.maxX ?? 00) - 180, y: 260)
+        default:
+            print("erro")
+        }
+
         
 //        (self.scene?.frame.maxX ?? 00)
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -425,7 +437,19 @@ class GameScene: SKScene {
         score.fontColor = .black
         score.fontSize = 17
         score.zPosition = 12   //(self.scene?.frame.maxY ?? 230) - 100)
-        score.position = CGPoint(x: (self.scene?.frame.minX ?? -170) + 140 , y: (self.scene?.frame.maxY ?? 430) - 100)
+        
+        switch AppConfig.UIDevice(){
+        case .pad:
+            score.position = CGPoint(x: (self.scene?.frame.minX ?? -170) + 140 , y: (self.scene?.frame.maxY ?? 430) - 100)
+        case .phone:
+            score.position = CGPoint(x: (self.scene?.frame.minX ?? -170) + 240 , y: (self.scene?.frame.maxY ?? 430) - 100)
+
+        default:
+            print("error")
+        }
+        
+        
+        
         score.text = "score: \(Train.singleton.getScore())"
         score.horizontalAlignmentMode = .left
         addChild(score)

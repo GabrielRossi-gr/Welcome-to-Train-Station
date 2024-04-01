@@ -62,14 +62,23 @@ class TutorialScene: SKScene {
         let heightScene = CGFloat(sceneFrame?.height ?? 00)
         tutorialNode.removeFromParent()
         tutorialNode.texture = SKTexture(imageNamed: imageName)
-        tutorialNode.size = CGSize(
-            width: (1024 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)  /*512*/ ,
-            height: (1366 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)/*683*/
-        )
         
-        //1024
-        //1366
-        
+        switch AppConfig.UIDevice(){
+        case .pad:
+            tutorialNode.size = CGSize(
+                width: (1024 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)  /*512*/ ,
+                height: (1366 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)/*683*/)
+        case .phone:
+            tutorialNode.size = CGSize(
+                width: (554 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)  /*512*/ ,
+                height: (766 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)/*683*/)
+        default:
+            print("tutorial scene error")
+        }
+    
+        //default size 1024
+        //default size 1366
+
         tutorialNode.zPosition = 10
         tutorialNode.position = CGPoint(x: 0, y: 0)
         addChild(tutorialNode)
@@ -79,7 +88,16 @@ class TutorialScene: SKScene {
         let sceneFrame = scene?.frame
         nextButton.removeFromParent()
         nextButton.texture = SKTexture(imageNamed: "right")
-        nextButton.size = CGSize(width: 90, height: 90)
+        
+        switch AppConfig.UIDevice(){
+        case .pad:
+            nextButton.size = CGSize(width: 90, height: 90)
+        case .phone:
+            nextButton.size = CGSize(width: 50, height: 50)
+        default:
+            print("error")
+        }
+        
         nextButton.zPosition = 20
         nextButton.position = CGPoint(x:(sceneFrame?.maxX ?? 00) - 60, y: (sceneFrame?.minY ?? 0) + 70)
         addChild(nextButton)
@@ -89,7 +107,16 @@ class TutorialScene: SKScene {
         let sceneFrame = scene?.frame
         anteriorButton.removeFromParent()
         anteriorButton.texture = SKTexture(imageNamed: "left")
-        anteriorButton.size = CGSize(width: 90, height: 90)
+        
+        switch AppConfig.UIDevice(){
+        case .pad:
+            anteriorButton.size = CGSize(width: 90, height: 90)
+        case .phone:
+            anteriorButton.size = CGSize(width: 50, height: 50)
+        default:
+            print("error")
+        }
+        
         anteriorButton.zPosition = 20
         anteriorButton.position = CGPoint(x:(sceneFrame?.minX ?? 00) + 60, y: (sceneFrame?.minY ?? 0) + 70)
         addChild(anteriorButton)
@@ -121,7 +148,16 @@ class TutorialScene: SKScene {
         self.playButton.removeFromParent()
         playButton.texture = SKTexture(imageNamed: "ButtonIMGStart")
         playButton.position = CGPoint(x: 0, y: (self.scene?.frame.minY)! + 70)
-        playButton.size = CGSize(width: 320, height: 76)
+        
+        switch AppConfig.UIDevice(){
+        case .pad:
+            playButton.size = CGSize(width: 320, height: 76)
+        case .phone:
+            playButton.size = CGSize(width: 190, height: 46)
+        default:
+            print("error")
+        }
+        
         playButton.zPosition = 30
         playButton.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         playButton.name = "ButtonIMGStart"

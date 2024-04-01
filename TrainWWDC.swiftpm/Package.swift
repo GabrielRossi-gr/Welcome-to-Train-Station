@@ -18,7 +18,7 @@ let package = Package(
             targets: ["AppModule"],
             bundleIdentifier: "com.gabrielrossi.TrainWWDC",
             teamIdentifier: "HT9NV9BAKV",
-            displayVersion: "0.0.1",
+            displayVersion: "0.0.4",
             bundleVersion: "1",
             appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.red),
@@ -27,7 +27,10 @@ let package = Package(
                 .pad
             ],
             supportedInterfaceOrientations: [
-                .portrait
+                .portrait,
+                .landscapeLeft,
+                .landscapeRight,
+                .portraitUpsideDown
             ],
             appCategory: .arcadeGames
         )

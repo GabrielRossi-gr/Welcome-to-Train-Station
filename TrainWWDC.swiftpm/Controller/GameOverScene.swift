@@ -17,8 +17,8 @@ class GameOverScene: SKScene {
     var tutorialNode = SKSpriteNode()
     
     override func didMove(to view: SKView) {
-//        ConfigExtention.font.getFontSetup()
-//        fontSetup()
+        ConfigExtention.font.getFontSetup()
+        fontSetup()
         buttonSetup()
         setupTutorialNode(imageName: "GameOverIMG")
     }
@@ -29,7 +29,14 @@ class GameOverScene: SKScene {
         self.restartButton.removeFromParent()
         restartButton.texture = SKTexture(imageNamed: "Restart")
         restartButton.position = CGPoint(x: 0, y: (self.scene?.frame.minY)! + 70)
-        restartButton.size = CGSize(width: 320, height: 76)
+        switch AppConfig.UIDevice(){
+        case .pad:
+            restartButton.size = CGSize(width: 320, height: 76)
+        case .phone:
+            restartButton.size = CGSize(width: 270, height: 56)
+        default:
+            print("error")
+        }
         restartButton.zPosition = 30
         restartButton.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         restartButton.name = "ButtonIMGStart"
@@ -38,8 +45,15 @@ class GameOverScene: SKScene {
         
         tutorial.removeFromParent()
         tutorial.texture = SKTexture(imageNamed: "Tutorial")
-        tutorial.position = CGPoint(x: 0, y: (self.scene?.frame.minY)! + 180)
-        tutorial.size = CGSize(width: 320, height: 76)
+        tutorial.position = CGPoint(x: 0, y: (self.scene?.frame.minY)! + 150)
+        switch AppConfig.UIDevice(){
+        case .pad:
+            tutorial.size = CGSize(width: 320, height: 76)
+        case .phone:
+            tutorial.size = CGSize(width: 270, height: 56)
+        default:
+            print("error")
+        }
         tutorial.zPosition = 20
         tutorial.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         addChild(tutorial)
@@ -48,21 +62,37 @@ class GameOverScene: SKScene {
     private func fontSetup(){
         gameOverLabel.removeFromParent()
         gameOverLabel.fontColor = .white
-        gameOverLabel.fontSize = 35
-        gameOverLabel.zPosition = 12   //(self.scene?.frame.maxY ?? 230) - 100)
-        gameOverLabel.position = CGPoint(x: 0, y: 120)
+        gameOverLabel.zPosition = 500   //(self.scene?.frame.maxY ?? 230) - 100)
         gameOverLabel.text = "Game Over"
         gameOverLabel.horizontalAlignmentMode = .center
-        addChild(gameOverLabel)
+        switch AppConfig.UIDevice(){
+        case .pad:
+            gameOverLabel.fontSize = 35
+            gameOverLabel.position = CGPoint(x: 0, y: 120)
+        case .phone:
+            gameOverLabel.fontSize = 35
+            gameOverLabel.position = CGPoint(x: 0, y: 30)
+        default:
+            print("error")
+        }
+//        addChild(gameOverLabel)
         
         
         scoreLabel.removeFromParent()
         scoreLabel.fontColor = .white
-        scoreLabel.fontSize = 20
         scoreLabel.zPosition = 12   //(self.scene?.frame.maxY ?? 230) - 100)
-        scoreLabel.position = CGPoint(x: 0, y: 70)
         scoreLabel.text = "score: \(Train.singleton.getScore())"
         scoreLabel.horizontalAlignmentMode = .center
+        switch AppConfig.UIDevice(){
+        case .pad:
+            scoreLabel.fontSize = 35
+            scoreLabel.position = CGPoint(x: 0, y: CGFloat(scene?.frame.minY ?? 00) + 250)
+        case .phone:
+            scoreLabel.fontSize = 25
+            scoreLabel.position = CGPoint(x: 0, y: CGFloat(scene?.frame.maxY ?? 00) - 100)
+        default:
+            print("error")
+        }
         addChild(scoreLabel)
     }
     
@@ -71,10 +101,20 @@ class GameOverScene: SKScene {
         let heightScene = CGFloat(sceneFrame?.height ?? 00)
         tutorialNode.removeFromParent()
         tutorialNode.texture = SKTexture(imageNamed: imageName)
-        tutorialNode.size = CGSize(
-            width: (1024 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)  /*512*/ ,
-            height: (1366 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)/*683*/
-        )
+        
+        switch AppConfig.UIDevice(){
+        case .pad:
+            tutorialNode.size = CGSize(
+                width: (1024 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)  /*512*/ ,
+                height: (1366 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)/*683*/)
+        case .phone:
+            tutorialNode.size = CGSize(
+                width: (554 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)  /*512*/ ,
+                height: (766 * (sceneFrame?.height ?? 1000)) / (heightScene * 0.9)/*683*/)
+        default:
+            print("error")
+        }
+        
         
         //1024
         //1366
